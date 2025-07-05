@@ -1,6 +1,6 @@
 # 🧭 Guía Técnica para Desarrollador – Web Demo RentaFlex
 
-Accede a la aplicación aquí: <mcurl name="https://web-demo-renta-flex.vercel.app" url="https://web-demo-renta-flex.vercel.app"></mcurl>
+Accede a la aplicación aquí: [https://web-demo-renta-flex.vercel.app](https://web-demo-renta-flex.vercel.app)
 
 ✅ **Objetivo General**  
 Desarrollar una aplicación web tipo **Airbnb**, funcional pero simulada, centrada en el uso de **MongoDB** como base de datos NoSQL, con funcionalidades clave como búsqueda, reservas, favoritos y publicación de propiedades.
@@ -39,13 +39,13 @@ Desarrollar una aplicación web tipo **Airbnb**, funcional pero simulada, centra
 ## 🔐 **Variables de Entorno (archivo .env en backend)**
 
 ```env
-MONGODB_URI=mongodb+srv://gabrielomar129:Q6y8LE2rCBb0eGuX@clusterrentafles.vy9eixv.mongodb.net/?retryWrites=true&w=majority&appName=ClusterRentafles
-JWT_SECRET=rentaflex_secret_key_2024
-JWT_EXPIRES_IN=7d
-
-CLOUDINARY_CLOUD_NAME=dyr7ghtnu
-CLOUDINARY_API_KEY=837467373171144
-CLOUDINARY_API_SECRET=AWmwSDr8OwDuIlfOGAA7k7xmLSg
+MONGODB_URI=tu_uri_mongodb
+   JWT_SECRET=tu_secreto_jwt
+   JWT_EXPIRES_IN=7d
+   CLOUDINARY_CLOUD_NAME=tu_nombre_de_nube_cloudinary
+   CLOUDINARY_API_KEY=tu_clave_api_cloudinary
+   CLOUDINARY_API_SECRET=tu_secreto_api_cloudinary
+   FRONTEND_URL=tu_url_frontend
 ```
 
 ## 🗂️ **Colecciones MongoDB**
