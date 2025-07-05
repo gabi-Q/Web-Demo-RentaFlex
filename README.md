@@ -1,5 +1,7 @@
 # 🧭 Guía Técnica para Desarrollador – Web Demo RentaFlex
 
+Accede a la aplicación aquí: <mcurl name="https://web-demo-renta-flex.vercel.app" url="https://web-demo-renta-flex.vercel.app"></mcurl>
+
 ✅ **Objetivo General**  
 Desarrollar una aplicación web tipo **Airbnb**, funcional pero simulada, centrada en el uso de **MongoDB** como base de datos NoSQL, con funcionalidades clave como búsqueda, reservas, favoritos y publicación de propiedades.
 

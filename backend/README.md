@@ -1,107 +1,106 @@
-# RentaFlex Backend
+Backend API para RentaFlex, una plataforma de alquiler similar a Airbnb construida con Node.js, Express y MongoDB.
 
-Backend API for RentaFlex, an Airbnb-like rental platform built with Node.js, Express, and MongoDB.
+## Características
 
-## Features
+- Autenticación de usuario con JWT
+- Gestión de propiedades (operaciones CRUD)
+- Carga de imágenes con Cloudinary
+- Sistema de reservas
+- Gestión de favoritos
+- Búsqueda y filtrado
+- Perfiles de usuario
 
-- User authentication with JWT
-- Property management (CRUD operations)
-- Image upload with Cloudinary
-- Reservation system
-- Favorites management
-- Search and filtering
-- User profiles
+## Requisitos previos
 
-## Prerequisites
+- Node.js (v14 o superior)
+- Cuenta de MongoDB Atlas
+- Cuenta de Cloudinary
 
-- Node.js (v14 or higher)
-- MongoDB Atlas account
-- Cloudinary account
+## Configuración
 
-## Setup
-
-1. Clone the repository
-2. Install dependencies:
+1. Clona el repositorio
+2. Instala las dependencias:
    ```bash
    npm install
    ```
-3. Create a `.env` file in the root directory with the following variables:
+3. Crea un archivo `.env` en el directorio raíz con las siguientes variables:
    ```
-   MONGODB_URI=your_mongodb_uri
-   JWT_SECRET=your_jwt_secret
+   MONGODB_URI=tu_uri_mongodb
+   JWT_SECRET=tu_secreto_jwt
    JWT_EXPIRES_IN=7d
-   CLOUDINARY_CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_api_key
-   CLOUDINARY_API_SECRET=your_api_secret
+   CLOUDINARY_CLOUD_NAME=tu_nombre_de_nube_cloudinary
+   CLOUDINARY_API_KEY=tu_clave_api_cloudinary
+   CLOUDINARY_API_SECRET=tu_secreto_api_cloudinary
+   FRONTEND_URL=tu_url_frontend
    ```
-4. Create an `uploads` directory in the root folder:
+4. Crea un directorio `uploads` en la carpeta raíz:
    ```bash
    mkdir uploads
    ```
 
-## Running the Application
+## Ejecutando la aplicación
 
-Development mode:
+Modo desarrollo:
 ```bash
 npm run dev
 ```
 
-Production mode:
+Modo producción:
 ```bash
 npm start
 ```
 
-## API Endpoints
+## Endpoints de la API
 
-### Authentication
-- POST `/api/auth/register` - Register new user
-- POST `/api/auth/login` - Login user
-- GET `/api/auth/me` - Get current user
+### Autenticación
+- POST `/api/auth/register` - Registrar nuevo usuario
+- POST `/api/auth/login` - Iniciar sesión de usuario
+- GET `/api/auth/me` - Obtener usuario actual
 
-### Properties
-- GET `/api/propiedades` - Get all properties
-- GET `/api/propiedades/buscar` - Search properties
-- GET `/api/propiedades/:id` - Get property by ID
-- POST `/api/propiedades` - Create new property
-- PUT `/api/propiedades/:id` - Update property
-- DELETE `/api/propiedades/:id` - Delete property
+### Propiedades
+- GET `/api/propiedades` - Obtener todas las propiedades
+- GET `/api/propiedades/buscar` - Buscar propiedades
+- GET `/api/propiedades/:id` - Obtener propiedad por ID
+- POST `/api/propiedades` - Crear nueva propiedad
+- PUT `/api/propiedades/:id` - Actualizar propiedad
+- DELETE `/api/propiedades/:id` - Eliminar propiedad
 
-### Reservations
-- GET `/api/reservas/mis-reservas` - Get user's reservations
-- GET `/api/reservas/propiedad/:id` - Get property's reservations
-- POST `/api/reservas` - Create reservation
-- PUT `/api/reservas/:id/cancelar` - Cancel reservation
+### Reservas
+- GET `/api/reservas/mis-reservas` - Obtener reservas del usuario
+- GET `/api/reservas/propiedad/:id` - Obtener reservas de la propiedad
+- POST `/api/reservas` - Crear reserva
+- PUT `/api/reservas/:id/cancelar` - Cancelar reserva
 
-### User
-- GET `/api/usuarios/favoritos` - Get user's favorites
-- POST `/api/usuarios/favoritos/:propiedad_id` - Add to favorites
-- DELETE `/api/usuarios/favoritos/:propiedad_id` - Remove from favorites
-- PUT `/api/usuarios/perfil` - Update user profile
+### Usuario
+- GET `/api/usuarios/favoritos` - Obtener favoritos del usuario
+- POST `/api/usuarios/favoritos/:propiedad_id` - Añadir a favoritos
+- DELETE `/api/usuarios/favoritos/:propiedad_id` - Eliminar de favoritos
+- PUT `/api/usuarios/perfil` - Actualizar perfil de usuario
 
-## Error Handling
+## Manejo de errores
 
-The API uses standard HTTP status codes:
-- 200: Success
-- 201: Created
-- 400: Bad Request
-- 401: Unauthorized
-- 403: Forbidden
-- 404: Not Found
-- 500: Internal Server Error
+La API utiliza códigos de estado HTTP estándar:
+- 200: Éxito
+- 201: Creado
+- 400: Solicitud incorrecta
+- 401: No autorizado
+- 403: Prohibido
+- 404: No encontrado
+- 500: Error interno del servidor
 
-## Security
+## Seguridad
 
-- JWT authentication for protected routes
-- Password hashing with bcrypt
-- Environment variables for sensitive data
-- CORS enabled
-- Input validation
-- File upload restrictions
+- Autenticación JWT para rutas protegidas
+- Hash de contraseñas con bcrypt
+- Variables de entorno para datos sensibles
+- CORS habilitado
+- Validación de entrada
+- Restricciones de carga de archivos
 
-## Deployment
+## Despliegue
 
-The backend is configured for deployment on Render:
-1. Connect your GitHub repository
-2. Set environment variables
-3. Set build command: `npm install`
-4. Set start command: `npm start` 
+El backend está configurado para el despliegue en Render:
+1. Conecta tu repositorio de GitHub
+2. Establece las variables de entorno
+3. Establece el comando de construcción: `npm install`
+4. Establece el comando de inicio: `npm start`
