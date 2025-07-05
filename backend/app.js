@@ -22,11 +22,32 @@ cloudinary.config({
 // Crear la aplicación Express
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: 'http://localhost:5173',
+// --- INICIO DE LA CORRECCIÓN DE CORS ---
+
+// Lista de orígenes permitidos
+const allowedOrigins = [
+  'http://localhost:5173', // Tu frontend local
+  process.env.FRONTEND_URL // La URL de tu frontend en Render
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Permite las peticiones si el origen está en la lista o si no hay origen (ej. Postman)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
+
+// --- FIN DE LA CORRECCIÓN DE CORS ---
+
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -56,7 +77,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
+// Rutas (¡Esto ya estaba bien!)
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/reservas', reservaRoutes);
@@ -83,4 +104,4 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
-}); 
+});
