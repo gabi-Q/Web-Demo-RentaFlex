@@ -144,11 +144,11 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(403).json({ message: 'No autorizado para eliminar esta propiedad' });
     }
 
-    await property.remove();
+    await Property.findByIdAndDelete(req.params.id);
     res.json({ message: 'Propiedad eliminada' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-module.exports = router; 
+module.exports = router;

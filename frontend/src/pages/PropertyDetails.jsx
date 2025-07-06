@@ -13,10 +13,23 @@ const PropertyDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [selectedImage, setSelectedImage] = useState(0);
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const getToday = () => formatDate(new Date());
+  const getTomorrow = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return formatDate(tomorrow);
+  };
+
   const [reservation, setReservation] = useState({
-    desde: '',
-    hasta: '',
-    
+    desde: getToday(),
+    hasta: getTomorrow(),
   });
 
   useEffect(() => {
@@ -152,16 +165,13 @@ const PropertyDetails = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Llegada
                   </label>
-                  <input
-                    type="date"
-                    name="desde"
-                    value={reservation.desde}
-                    onChange={(e) =>
-                      setReservation({ ...reservation, desde: e.target.value })
-                    }
-                    min={new Date().toISOString().split('T')[0]}
+                  <DatePicker
+                    selected={reservation.desde ? new Date(reservation.desde + 'T00:00:00') : null}
+                    onChange={(date) => setReservation({ ...reservation, desde: formatDate(date) })}
+                    minDate={new Date()}
+                    dateFormat="dd/MM/yyyy"
                     required
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900 [&::-webkit-calendar-picker-indicator]:text-gray-700 [&::-webkit-calendar-picker-indicator]:hover:text-gray-900"
+                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                   />
                 </div>
 
@@ -169,16 +179,13 @@ const PropertyDetails = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Salida
                   </label>
-                  <input
-                    type="date"
-                    name="hasta"
-                    value={reservation.hasta}
-                    onChange={(e) =>
-                      setReservation({ ...reservation, hasta: e.target.value })
-                    }
-                    min={reservation.desde || new Date().toISOString().split('T')[0]}
+                  <DatePicker
+                    selected={reservation.hasta ? new Date(reservation.hasta + 'T00:00:00') : null}
+                    onChange={(date) => setReservation({ ...reservation, hasta: formatDate(date) })}
+                    minDate={reservation.desde ? new Date(new Date(reservation.desde + 'T00:00:00').getTime() + 86400000) : new Date()}
+                    dateFormat="dd/MM/yyyy"
                     required
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900 [&::-webkit-calendar-picker-indicator]:text-gray-700 [&::-webkit-calendar-picker-indicator]:hover:text-gray-900"
+                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                   />
                 </div>
 
@@ -197,4 +204,4 @@ const PropertyDetails = () => {
   );
 };
 
-export default PropertyDetails; 
+export default PropertyDetails;

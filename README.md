@@ -3,7 +3,7 @@
 Accede a la aplicación aquí: [https://web-demo-renta-flex.vercel.app](https://web-demo-renta-flex.vercel.app)
 
 ✅ **Objetivo General**  
-Desarrollar una aplicación web tipo **Airbnb**, funcional pero simulada, centrada en el uso de **MongoDB** como base de datos NoSQL, con funcionalidades clave como búsqueda, reservas, favoritos y publicación de propiedades.
+Desarrollar una aplicación web tipo **Airbnb**, funcional pero simulada, centrada en el uso de **MongoDB** como base de datos NoSQL, con funcionalidades clave como búsqueda, reservas y publicación de propiedades.
 
 💡 **Importante**: La app **NO requiere pagos reales**. Todo pago es una **simulación**.
 
@@ -73,28 +73,33 @@ MONGODB_URI=tu_uri_mongodb
   "estado": "disponible"
 }
 ```
-### **Usuarios***
+### **Usuarios**
 
 ```json
 {
   "nombre": "Carlos Pérez",
   "email": "carlos@mail.com",
+  "password": "hashed_password",
   "telefono": "+511234567890",
-  "rol": "usuario",
-  "favoritos": ["id_prop_1", "id_prop_2"]
+  "rol": "usuario"
 }
 ```
-### **Reservas***
+### **Reservas**
 
 ```json
 {
-  "usuario_id": "id_usuario",
-  "propiedad_id": "id_propiedad",
+  "usuario": {
+    "type": "ObjectId",
+    "ref": "Usuario"
+  },
+  "propiedad": {
+    "type": "ObjectId",
+    "ref": "Propiedad"
+  },
   "desde": "2025-06-01",
   "hasta": "2025-06-05",
   "estado": "confirmada"
 }
-
 ```
 ## 🔧 **Estructura del Proyecto**
 
@@ -176,7 +181,7 @@ MONGODB_URI=tu_uri_mongodb
     F --> I[🎟️ Reserva registrada]
     I --> J[📅 Mis reservas]
     H --> K[🏘️ Mis propiedades]
-    D --> L[❤️ Agregar a favoritos (requiere login)]
+
 ## 🧩 **Funcionalidades por Área**
 
 ### 🏠 **Página Principal**
@@ -202,9 +207,7 @@ MONGODB_URI=tu_uri_mongodb
 - Subida de imágenes a Cloudinary.
 - Edición y eliminación por autor.
 
-### ⭐ **Favoritos**
-- Guardar/eliminar propiedades favoritas.
-- Vista de favoritos en el panel de usuario.
+
 
 ### 📅 **Reservas (Simuladas)**
 - Validación de fechas y creación de reserva.
@@ -214,7 +217,7 @@ MONGODB_URI=tu_uri_mongodb
 ### 👤 **Panel de Usuario**
 - Lista de propiedades creadas.
 - Reservas activas.
-- Favoritos guardados.
+
 
 ## 🧪 **Despliegue Gratuito**
 - ✅ **Render (Backend):** Web Service gratuito.
@@ -389,4 +392,3 @@ MONGODB_URI=tu_uri_mongodb
 ### **Notas Finales**
 - **Simulación de pago**: la funcionalidad de pago no involucra transacciones reales y que todo es una simulación, tanto en el backend como en el frontend.
 - **Autenticación**: El sistema de autenticación basado en **JWT** debe proteger adecuadamente las rutas para la creación de reservas y publicación de propiedades, con una clara validación de sesión en todo momento.
-- **Favoritos**: La acción de agregar propiedades a favoritos está restringida solo a usuarios autenticados, lo cual se debe dejar claro en el flujo de navegación y la interfaz.

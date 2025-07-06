@@ -1,24 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { propertyService } from '../services/propertyService';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const CardProperty = ({ property }) => {
-  const { isAuthenticated } = useAuth();
-  const [isFavorite, setIsFavorite] = useState(property.isFavorite);
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  const handleFavorite = async (e) => {
-    e.preventDefault();
-    if (!isAuthenticated) return;
-
-    try {
-      await propertyService.toggleFavorite(property._id);
-      setIsFavorite(!isFavorite);
-    } catch (error) {
-      console.error('Error al actualizar favoritos:', error);
-    }
-  };
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -34,31 +18,10 @@ const CardProperty = ({ property }) => {
             onLoad={() => setImageLoaded(true)}
           />
         </div>
-        {isAuthenticated && (
-          <button
-            onClick={handleFavorite}
-            className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
-          >
-            <svg
-              className={`w-6 h-6 ${
-                isFavorite ? 'text-red-500' : 'text-gray-400'
-              }`}
-              fill={isFavorite ? 'currentColor' : 'none'}
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-          </button>
-        )}
       </div>
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-2">{property.titulo}</h3>
+        <p className="text-gray-700 font-semibold mb-2">{property.ubicacion.distrito}</p>
         <p className="text-gray-600 mb-4 line-clamp-2">{property.descripcion}</p>
         <div className="flex justify-between items-center">
           <span className="text-2xl font-bold text-blue-600">
@@ -110,4 +73,4 @@ const CardProperty = ({ property }) => {
   );
 };
 
-export default CardProperty; 
+export default CardProperty;

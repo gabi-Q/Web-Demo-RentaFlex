@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Reserva = require('../models/Reserva');
 const Propiedad = require('../models/Property');
 
@@ -13,7 +14,7 @@ const crearReserva = async (req, res) => {
       esValidoMongoose: mongoose.Types.ObjectId.isValid(propiedad_id)
     };
 
-    
+    console.log('Datos de entrada para crear reserva:', { propiedad_id, desde, hasta });
 
     console.log('Buscando propiedad con ID:', propiedad_id);
     console.log('Tipo de ID:', typeof propiedad_id);
@@ -128,24 +129,27 @@ const cancelarReserva = async (req, res) => {
       return res.status(403).json({ message: 'No autorizado' });
     }
 
-    // Check if reservation can be cancelled (e.g., not too close to start date)
-    const ahora = new Date();
-    const fechaInicio = new Date(reserva.desde);
-    const diasDiferencia = Math.ceil((fechaInicio - ahora) / (1000 * 60 * 60 * 24));
-
-    if (diasDiferencia < 2) {
-      return res.status(400).json({ message: 'No se puede cancelar la reserva con menos de 2 días de anticipación' });
-    }
-
     reserva.estado = 'cancelada';
     await reserva.save();
 
     // Update property availability
     const propiedad = await Propiedad.findById(reserva.propiedad);
-    propiedad.disponibilidad = propiedad.disponibilidad.filter(
-      disp => !(disp.inicio.getTime() === new Date(reserva.desde).getTime() &&
-                disp.fin.getTime() === new Date(reserva.hasta).getTime())
-    );
+    const reservaDesde = new Date(reserva.desde);
+    const reservaHasta = new Date(reserva.hasta);
+
+    propiedad.disponibilidad = propiedad.disponibilidad.filter(disp => {
+      const dispInicio = new Date(disp.inicio);
+      const dispFin = new Date(disp.fin);
+
+      const match = dispInicio.getFullYear() === reservaDesde.getFullYear() &&
+                    dispInicio.getMonth() === reservaDesde.getMonth() &&
+                    dispInicio.getDate() === reservaDesde.getDate() &&
+                    dispFin.getFullYear() === reservaHasta.getFullYear() &&
+                    dispFin.getMonth() === reservaHasta.getMonth() &&
+                    dispFin.getDate() === reservaHasta.getDate();
+
+      return !match;
+    });
     await propiedad.save();
 
     res.json({ message: 'Reserva cancelada exitosamente' });
@@ -159,4 +163,4 @@ module.exports = {
   getMisReservas,
   getReservasPropiedad,
   cancelarReserva
-}; 
+};

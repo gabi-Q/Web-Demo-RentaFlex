@@ -193,7 +193,7 @@ const eliminarPropiedad = async (req, res) => {
       })
     );
 
-    await propiedad.remove();
+    await Propiedad.findByIdAndDelete(req.params.id);
     res.json({ message: 'Propiedad eliminada' });
   } catch (error) {
     res.status(500).json({ message: 'Error al eliminar propiedad' });
@@ -241,4 +241,4 @@ module.exports = {
   eliminarPropiedad,
   buscarPropiedades,
   getUserProperties
-}; 
+};

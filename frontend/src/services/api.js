@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
+//http://localhost:5000/api para local
   baseURL: 'https://web-demo-rentaflex-backend.onrender.com/api',
+  
   headers: {
     'Content-Type': 'application/json',
   },
@@ -64,4 +66,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api; 
+export default api;

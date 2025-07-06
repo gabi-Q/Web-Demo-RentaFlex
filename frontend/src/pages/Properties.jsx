@@ -85,6 +85,7 @@ const Properties = () => {
               />
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">{property.titulo}</h3>
+                <p className="text-gray-700 font-semibold mb-2">{property.ubicacion.distrito}</p>
                 <p className="text-gray-600 mb-4">{property.descripcion}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-blue-600">
@@ -118,4 +119,4 @@ const Properties = () => {
   );
 };
 
-export default Properties; 
+export default Properties;

@@ -31,7 +31,9 @@ const MyReservations = () => {
     try {
       await api.put(`/reservas/${reservationId}/cancelar`);
       setReservations((prev) =>
-        prev.filter((res) => res._id !== reservationId)
+        prev.map((res) =>
+          res._id === reservationId ? { ...res, estado: 'cancelada' } : res
+        )
       );
     } catch (error) {
       setError('Error al cancelar la reserva');
@@ -70,18 +72,28 @@ const MyReservations = () => {
             >
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div className="flex-1">
-                  <h2 className="text-xl font-semibold mb-2">
-                    {reservation.propiedad.titulo}
-                  </h2>
+                  {reservation.propiedad ? (
+                    <>
+                      <h2 className="text-xl font-semibold mb-2">
+                        {reservation.propiedad.titulo}
+                      </h2>
+                      <div className="text-gray-600">
+                        <p>
+                          <span className="font-medium">Llegada:</span>{' '}
+                          {new Date(reservation.desde).toLocaleDateString()}
+                        </p>
+                        <p>
+                          <span className="font-medium">Salida:</span>{' '}
+                          {new Date(reservation.hasta).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <h2 className="text-xl font-semibold mb-2 text-red-500">
+                      Publicación eliminada
+                    </h2>
+                  )}
                   <div className="text-gray-600">
-                    <p>
-                      <span className="font-medium">Llegada:</span>{' '}
-                      {new Date(reservation.desde).toLocaleDateString()}
-                    </p>
-                    <p>
-                      <span className="font-medium">Salida:</span>{' '}
-                      {new Date(reservation.hasta).toLocaleDateString()}
-                    </p>
                     <p>
                       <span className="font-medium">Estado:</span>{' '}
                       <span
@@ -97,12 +109,14 @@ const MyReservations = () => {
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <Link
-                    to={`/properties/${reservation.propiedad._id}`}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                  >
-                    Ver Propiedad
-                  </Link>
+                  {reservation.propiedad && (
+                    <Link
+                      to={`/properties/${reservation.propiedad._id}`}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                    >
+                      Ver Propiedad
+                    </Link>
+                  )}
                   {reservation.estado === 'confirmada' && (
                     <button
                       onClick={() => handleCancelReservation(reservation._id)}
@@ -121,4 +135,4 @@ const MyReservations = () => {
   );
 };
 
-export default MyReservations; 
+export default MyReservations;
