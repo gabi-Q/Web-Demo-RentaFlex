@@ -53,52 +53,60 @@ MONGODB_URI=tu_uri_mongodb
 ### **Propiedades**
 ```json
 {
-  "titulo": "Casa moderna con jardín",
-  "tipo": "casa",
-  "precio_noche": 100,
-  "descripcion": "Ideal para vacaciones",
-  "habitaciones": 3,
+  "_id": "686a0ad7dc60ad7da33f4f2b",
+  "titulo": "Suite Playa",
+  "tipo": "apartamento",
+  "precio_noche": 500,
+  "descripcion": "Suite con vista a la playa",
+  "habitaciones": 15,
   "banos": 2,
-  "area_m2": 120,
+  "area_m2": 800,
   "imagenes": [
-    "https://res.cloudinary.com/dyr7ghtnu/image/upload/v1234567890/casa1.jpg"
+    "https://res.cloudinary.com/dyr7ghtnu/image/upload/v1234567890/suite1.jpg"
   ],
   "ubicacion": {
     "distrito": "Ilo",
     "provincia": "Moquegua"
   },
-  "disponibilidad": [
-    { "inicio": "2025-06-01", "fin": "2025-06-10" }
-  ],
-  "estado": "disponible"
+  "disponibilidad": [],
+  "estado": "disponible",
+  "propietario": "68695a0eceff4f7c17d20c07", // Referencia al _id de la colección `usuarios`
+  "createdAt": "2025-07-06T05:34:15.879Z",
+  "updatedAt": "2025-07-06T13:32:31.364Z",
+  "__v": 2
 }
+
 ```
 ### **Usuarios**
 
 ```json
 {
-  "nombre": "Carlos Pérez",
-  "email": "carlos@mail.com",
-  "password": "hashed_password",
-  "telefono": "+511234567890",
-  "rol": "usuario"
+  "_id": "68196f1d86a335e1f8ced8ae",
+  "nombre": "honorio",
+  "email": "honorio@gmail.com",
+  "password": "$2a$10$SOzyVlg/D3Y5YEYtsM6tUemIahFIfZT6w5881OqZwGqdlrB66bLoy",
+  "telefono": "12345",
+  "rol": "usuario",
+  "createdAt": "2025-05-06T02:08:29.405Z",
+  "updatedAt": "2025-05-06T02:08:29.405Z",
+  "__v": 0
 }
 ```
 ### **Reservas**
 
 ```json
 {
-  "usuario": {
-    "type": "ObjectId",
-    "ref": "Usuario"
-  },
-  "propiedad": {
-    "type": "ObjectId",
-    "ref": "Propiedad"
-  },
-  "desde": "2025-06-01",
-  "hasta": "2025-06-05",
-  "estado": "confirmada"
+  "_id": "681ac36ee2b8c8fc46e6673c",
+  "usuario": "681ac0977295510f39f5cac8",     // Referencia al _id de la colección `usuarios`
+  "propiedad": "681a29cf726a6f8aba8bfd32", // Referencia al _id de la colección `propiedades`
+  "desde": "2025-05-08T00:00:00.000Z",
+  "hasta": "2025-05-10T00:00:00.000Z",
+  "noches": 2,
+  "precio_total": 268,
+  "estado": "confirmada",
+  "createdAt": "2025-05-07T02:20:30.764Z",
+  "updatedAt": "2025-05-07T02:20:30.764Z",
+  "__v": 0
 }
 ```
 ## 🔧 **Estructura del Proyecto**
