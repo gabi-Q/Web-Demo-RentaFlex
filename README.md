@@ -165,20 +165,18 @@ MONGODB_URI=tu_uri_mongodb
 ```
 ## 🔄 **Flujo de Navegación del Usuario**
 
-```mermaid
-graph TD
-    A[Inicio (sin login)] --> B[Ver propiedades]
-    B --> C[Filtrar por tipo, lugar, fechas]
-    C --> D[Ver detalles de propiedad]
-    D --> E[Iniciar sesión para reservar o publicar]
-    E --> F[Formulario de reserva simulada]
-    E --> G[Formulario de publicación (con subida a Cloudinary)]
-    G --> H[Propiedad publicada]
-    F --> I[Reserva registrada]
-    I --> J[Mis reservas]
-    H --> K[Mis propiedades]
-    D --> L[Agregar a favoritos (requiere login)]
-```
+
+    A[🏠 Inicio (sin login)] --> B[🔍 Ver propiedades]
+    B --> C[📊 Filtrar por tipo, lugar, fechas]
+    C --> D[📄 Ver detalles de propiedad]
+    D --> E[🔐 Iniciar sesión para reservar o publicar]
+    E --> F[📝 Formulario de reserva simulada]
+    E --> G[📤 Formulario de publicación (con subida a Cloudinary)]
+    G --> H[✅ Propiedad publicada]
+    F --> I[🎟️ Reserva registrada]
+    I --> J[📅 Mis reservas]
+    H --> K[🏘️ Mis propiedades]
+    D --> L[❤️ Agregar a favoritos (requiere login)]
 ## 🧩 **Funcionalidades por Área**
 
 ### 🏠 **Página Principal**
