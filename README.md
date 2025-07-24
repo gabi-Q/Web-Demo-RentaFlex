@@ -1,5 +1,15 @@
 # 🧭 Guía Técnica para Desarrollador – Web Demo RentaFlex
 
+Antes de acceder a la página web, **enciende el backend** entrando a:
+
+[https://web-demo-rentaflex-backend.onrender.com](https://web-demo-rentaflex-backend.onrender.com)
+
+Si todo está OK, verás la respuesta:
+
+```json
+{"message":"API de RentaFlex funcionando correctamente"}
+```
+
 Accede a la aplicación aquí: [https://web-demo-renta-flex.vercel.app](https://web-demo-renta-flex.vercel.app)
 
 ✅ **Objetivo General**  
